@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import "package:geolocator/geolocator.dart";
@@ -87,6 +87,9 @@ class _DailySummaryAppState extends State<DailySummaryApp> {
               child: SwipeCards(),
             ),
             SummaryChart(),
+            FlatButton(
+                onPressed: getWeatherInfo, child: Text("Get Weather Info"),
+            )
           ],
         ));
   }
@@ -147,88 +150,79 @@ class SwipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-          width: MediaQuery.of(context).size.width * 0.8,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: Colors.grey[300]),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Date XX XX XXXX"),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      width: MediaQuery.of(context).size.width * 0.8,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: Colors.grey[300]),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Date XX XX XXXX"),
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            Icon(
+              Icons.cloud,
+              size: 80,
+            ),
+            Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.cloud,
-                    size: 80,
+                  Text(
+                    "22°C",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "22°C",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      ),
-                      Text("Description of weather",
-                        maxLines: 2,),
-                    ],
-                  )
-                ],
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                ]),
+          ]),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        Icon(Icons.cloud),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text("XX%")
-                      ],
+                    Icon(Icons.cloud),
+                    SizedBox(
+                      width: 10,
                     ),
-                    Row(
-                      children: [
-                        Icon(Icons.cloud),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text("XX%")
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.fast_rewind),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text("XX%")
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.cloud),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text("XX%")
-                      ],
-                    ),
+                    Text("XX%")
                   ],
                 ),
-              ),
-            ],
+                Row(
+                  children: [
+                    Icon(Icons.cloud),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("XX%")
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.fast_rewind),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("XX%")
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.cloud),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("XX%")
+                  ],
+                ),
+              ],
+            ),
           ),
+        ],
+      ),
     );
   }
 }
-
 
 class SummaryChart extends StatelessWidget {
   const SummaryChart({Key? key}) : super(key: key);
@@ -245,3 +239,9 @@ class SummaryChart extends StatelessWidget {
   }
 }
 
+class TempData {
+  String temp;
+  String date;
+
+  TempData(this.temp, this.date);
+}
